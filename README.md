@@ -5,6 +5,15 @@ This is the backend service for the retail application, built using **Spring Boo
 mvn clean package -DskipTests
 mvn flyway:migrate
 
+Actuator endpoints will be available at:
+http://localhost:9080/actuator/health
+http://localhost:9080/actuator/info
+http://localhost:9080/actuator
+
+✅ Swagger UI: http://localhost:8080/swagger-ui.html
+✅ Actuator Health Check: http://localhost:8080/actuator/health
+✅ Actuator Info: http://localhost:8080/actuator/info
+
 ## Features
 - REST API for managing orders and products
 - PostgreSQL database integration
