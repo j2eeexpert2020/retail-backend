@@ -1,16 +1,19 @@
 package com.retail.test.integration;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import com.retail.entity.Order;
-import com.retail.repository.OrderRepository;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.testcontainers.junit.jupiter.Testcontainers;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-import static org.junit.jupiter.api.Assertions.*;
+import com.retail.entity.Order;
+import com.retail.repository.OrderRepository;
 
 @Testcontainers
 @SpringBootTest
@@ -20,6 +23,18 @@ public class OrderRepositoryTest {
             .withDatabaseName("testdb")
             .withUsername("testuser")
             .withPassword("testpass");
+
+    @BeforeAll
+    static void startContainer() {
+        postgres.start();
+    }
+
+    @DynamicPropertySource
+    static void configureDataSource(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url", postgres::getJdbcUrl);
+        registry.add("spring.datasource.username", postgres::getUsername);
+        registry.add("spring.datasource.password", postgres::getPassword);
+    }
 
     @Autowired
     private OrderRepository orderRepository;
