@@ -3,6 +3,7 @@
 This is the backend service for the retail application, built using **Spring Boot** with support for **Kafka, RabbitMQ, PostgreSQL, and Selenium-based UI testing**. 
 
 mvn clean package -DskipTests
+mvn flyway:migrate
 
 ## Features
 - REST API for managing orders and products
