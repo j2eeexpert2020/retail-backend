@@ -40,4 +40,5 @@ services:
       SPRING_DATASOURCE_USERNAME: testuser
       SPRING_DATASOURCE_PASSWORD: testpass
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SPRING_PROFILES_ACTIVE: docker  #Set Active Profile as 'docker'
     restart: always
